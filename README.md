@@ -86,5 +86,5 @@ Check if the PyTorch include the GPU arch which you are using
 
 ```
 python -c "import torch;print(torch.cuda.get_arch_list())"
-```![image](https://github.com/gaojon/sd_rocm/assets/24599083/d218eefc-2919-43ed-98dd-9bb3b1b14cbb)
+```
 
