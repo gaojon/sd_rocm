@@ -70,7 +70,7 @@ This is going to take a while to download the models.
 
 ## launch web browser to connect to Web UI
 
-Use chrome or fiefox to start a browser and use 0.0.0.0:7860 to connect to SD. Then, enjoy and explore the SD features! 
+Use chrome or firefox to start a browser and use 0.0.0.0:7860 to connect to SD. Then, enjoy and explore the SD features! 
 
 
 ## Tips
@@ -82,9 +82,10 @@ python launch.py --listen
 ```
 
 
-Check if the PyTorch include the GPU arch which you are using
+Check if the PyTorch includes the GPU arch which you are using. If it return empty list, it means you are not using the correct PyTorch. You should not see this issue if you starting with docker with ROCm/PyTorch image.
 
 ```
 python -c "import torch;print(torch.cuda.get_arch_list())"
+['gfx900', 'gfx906', 'gfx908', 'gfx90a', 'gfx1030', 'gfx1100', 'gfx1101', 'gfx940', 'gfx941', 'gfx942']
 ```
 
