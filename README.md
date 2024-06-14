@@ -4,9 +4,7 @@ Install with docker will be easier for most users. This will cover how to instal
 
 ## Install ROCm on host 
 
-Just follow the link to install the latest version of ROCm. In following link, it shows how to install ROCm 6.1.6
-
-Just for you reference. You don't need to jump to this link. 
+Here is the step to show how to install ROCm 6.1.6 on Ubuntu 22.04. If you are using other OS, please refer to the following link.
 https://rocm.docs.amd.com/projects/install-on-linux/en/latest/tutorial/quick-start.html
 
 
@@ -33,27 +31,24 @@ Device  Node  IDs              Temp    Power   Partitions          SCLK     MCLK
 0       2     0x740f,   21782  28.0°C  42.0W   N/A, N/A, 0         800Mhz   1600Mhz  0%   auto  300.0W  92%    0%
 ```
 
-## Setting up with docker
+## Setting up  docker
 
-pull rocm/pytorch from hub
-
-https://hub.docker.com/r/rocm/pytorch
+Assume you have already installed docker successfully. We are going to start from official docker image of rocm/pytorch from docker hub
 
 ```
 docker pull rocm/pytorch:latest
 ```
 
-Start the docker and map the ethernet port 7860 and map your docker directory under your home to docker. You will download the SD into your home docker directory. 
+Start the docker and map the ethernet port 7860, and map your docker directory under your home to docker. You will download the SD into your home docker directory. 
 ```
 docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
 --device=/dev/kfd --device=/dev/dri --group-add video --name sd \
 --ipc=host --shm-size 8G -p 0.0.0.0:7860:7860 -v $HOME/docker:/docker rocm/pytorch:latest
-
 ```
 
-After docker initiated successfully, you will get interaction shell. Input following command inside the docker.
+After docker initiated successfully, you will attach to an interaction shell. Input following command inside the docker.
 
-Get the stable diffusion Web UI from Github
+Get the stable diffusion Web UI from Github and setup the python packages dependency.
 ```
 cd /docker
 
@@ -70,19 +65,19 @@ This is going to take a while to download the models.
 
 ## launch web browser to connect to Web UI
 
-Use chrome or firefox to start a browser and use 0.0.0.0:7860 to connect to SD. Then, enjoy and explore the SD features! 
+Use chrome or firefox to start a browser and use 0.0.0.0:7860 to connect to SD. Then, enjoy and explore the SD features with AMD GPU! 
 
 
 ## Tips
 
-If you have multiple GPU card, you could choose the one before launching SD. Here is the example to use the second GPU. 
+If you have multiple GPU cards, you could choose the one before launching SD. Here is the example to use the second GPU. 
 ```
 export CUDA_VISIBLE_DEVICES=1
 python launch.py --listen
 ```
 
 
-Check if the PyTorch includes the GPU arch which you are using. If it return empty list, it means you are not using the correct PyTorch. You should not see this issue if you starting with docker with ROCm/PyTorch image.
+Check if the PyTorch includes the GPU archs which you are using. If it return empty list, it means you are not using the correct PyTorch. You should not see this issue if you starting from ROCm/PyTorch dock image.
 
 ```
 python -c "import torch;print(torch.cuda.get_arch_list())"
