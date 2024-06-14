@@ -6,7 +6,7 @@ Install with docker will be easier for most users. This will cover how to instal
 
 Just follow the link to install the latest version of ROCm. In following link, it shows how to install ROCm 6.1.6
 
-
+Just for you reference. You don't need to jump to this link. 
 https://rocm.docs.amd.com/projects/install-on-linux/en/latest/tutorial/quick-start.html
 
 
@@ -43,7 +43,7 @@ https://hub.docker.com/r/rocm/pytorch
 docker pull rocm/pytorch:latest
 ```
 
-Start the docker and map the ethernet port 7860
+Start the docker and map the ethernet port 7860 and map your docker directory under your home to docker. You will download the SD into your home docker directory. 
 ```
 docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
 --device=/dev/kfd --device=/dev/dri --group-add video --name sd \
@@ -55,7 +55,7 @@ After docker initiated successfully, you will get interaction shell. Input follo
 
 Get the stable diffusion Web UI from Github
 ```
-cd docker
+cd /docker
 
 git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui
 cd stable-diffusion-webui
